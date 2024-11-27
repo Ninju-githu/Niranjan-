@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Video with Button</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: /* Prevent flashing background */
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .button-container {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .button-container button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video id="bgVideo" autoplay muted preload="auto">
+            <source src="https://www.dropbox.com/scl/fi/uz0ujia9p7ug0tupzy58j/istockphoto-481914794-640_adpp_is-vmake.mp4?rlkey=8lsag7ry0lkv17pjh5vsmhhvr&st=uzmqqxy3&dl=1" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="button-container" id="buttonContainer">
+        <button onclick="alert('Button Clicked!')">Click Me</button>
+    </div>
+
+    <script>
+        const bgVideo = document.getElementById('bgVideo');
+        const buttonContainer = document.getElementById('buttonContainer');
+
+        // Ensure the video starts playing as soon as it's ready
+        bgVideo.oncanplay = () => {
+            bgVideo.play(); // Start playing when the video is ready to play
+        };
+
+        // Show the button after the video ends
+        bgVideo.onended = () => {
+            buttonContainer.style.display = 'block'; // Show the button after the video ends
+        };
+    </script>
+</body>
+</html>
